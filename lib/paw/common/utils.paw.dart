@@ -1,4 +1,5 @@
 import 'dart:convert';
+// import 'dart:developer' as dev;
 
 import 'ansi_codes.paw.dart';
 
@@ -160,10 +161,11 @@ class InternalUtils {
     }
   }
 
-  static void log(String log, {bool shouldPrintLog = true}) {
+  static void log(String logM, {bool shouldPrintLog = true}) {
     if (shouldPrintLog) {
+      // dev.log(logM, name: "👉");
       // ignore: avoid_print
-      print(log);
+      print(logM);
     }
   }
 }

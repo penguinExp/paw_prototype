@@ -151,3 +151,14 @@ void printLog2() {
 // Theme (Dark & Light)
 
 // p - 8, m - 12
+
+///
+/// Fallowing are the common colors
+/// 
+/// - primary (color for the text on bg, the metadata of the log) [white / black]
+/// - secondary (color for the msg text) [pinkish white / brighter gray]
+/// - bg-[lvl] (to highlight the log level) [depends on the level of the log]
+/// - secBg (to highlight time and source file info) [gray]
+/// - tertiary (for the content like data or stacktrace) [pinkish shite]
+/// - accent (for error, warning msg or any imp info shown by the logs) [red]
+///
