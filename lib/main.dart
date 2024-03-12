@@ -39,7 +39,9 @@ class HomePage extends StatelessWidget {
               onPressed: () {
                 final paw = Paw(name: "PAW");
                 paw.info("this is info message");
-                paw.warn("this is info message");
+                paw.warn(
+                  "this is a warning message telling user that something is not good",
+                );
 
                 paw.debug(
                   {
@@ -49,7 +51,7 @@ class HomePage extends StatelessWidget {
                   },
                 );
 
-                paw.trace("this is info message");
+                paw.trace("lets trace the activity of our code");
 
                 try {
                   int.parse("23d");

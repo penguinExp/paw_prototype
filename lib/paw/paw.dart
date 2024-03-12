@@ -1,4 +1,5 @@
-import 'package:paw_prototype/paw/common/utils.paw.dart';
+import 'common/theme_color.dart';
+import 'common/utils.paw.dart';
 
 class Paw {
   final String name;
@@ -6,6 +7,8 @@ class Paw {
   final bool shouldPrintName;
   final bool shouldPrintLogs;
   final bool shouldIncludeSourceInfo;
+
+  final darkTheme = DarkTheme();
 
   Paw({
     required this.name,
@@ -19,7 +22,6 @@ class Paw {
     // Do nothing if current environment is not debug
     if (!shouldPrintLogs) return;
 
-    const fg = "\x1b[38;5;255m";
     const escape = "\x1B[0m";
 
     final timeStamp = InternalUtils.getCurrentTimeStamp();
@@ -29,7 +31,7 @@ class Paw {
     );
 
     final String logMessage =
-        "\x1b[48;5;4m\x1b[1m$fg PAW › INFO  $escape\x1b[48;5;237m$fg $timeStamp › $sourceFileInfo $escape$fg $msg $escape";
+        "${darkTheme.bgInfo}\x1b[1m${darkTheme.primary} PAW › INFO  $escape${darkTheme.secBg}${darkTheme.primary} $timeStamp › $sourceFileInfo $escape${darkTheme.sec} $msg $escape";
 
     InternalUtils.log(logMessage);
   }
@@ -38,7 +40,6 @@ class Paw {
     // Do nothing if current environment is not debug
     if (!shouldPrintLogs) return;
 
-    const fg = "\x1b[38;5;255m";
     const escape = "\x1B[0m";
 
     final timeStamp = InternalUtils.getCurrentTimeStamp();
@@ -48,7 +49,7 @@ class Paw {
     );
 
     final String logMessage =
-        "\x1b[48;5;199m\x1b[1m$fg PAW › WARN  $escape\x1b[48;5;237m$fg $timeStamp › $sourceFileInfo $escape\x1b[3m\x1b[38;5;199m $msg $escape";
+        "${darkTheme.bgWarn}\x1b[1m${darkTheme.primary} PAW › WARN  $escape${darkTheme.secBg}${darkTheme.primary} $timeStamp › $sourceFileInfo $escape\x1b[3m${darkTheme.errOne} $msg $escape";
 
     InternalUtils.log(logMessage);
   }
@@ -57,7 +58,6 @@ class Paw {
     // Do nothing if current environment is not debug
     if (!shouldPrintLogs) return;
 
-    const fg = "\x1b[38;5;255m";
     const escape = "\x1B[0m";
 
     final timeStamp = InternalUtils.getCurrentTimeStamp();
@@ -67,7 +67,7 @@ class Paw {
     );
 
     final String logMessage =
-        "\x1b[48;5;36m\x1b[1m$fg PAW › TRACE $escape\x1b[48;5;237m$fg $timeStamp › $sourceFileInfo $escape$fg $msg $escape";
+        "${darkTheme.bgTrace}\x1b[1m${darkTheme.primary} PAW › TRACE $escape${darkTheme.secBg}${darkTheme.primary} $timeStamp › $sourceFileInfo $escape${darkTheme.sec} $msg $escape";
 
     InternalUtils.log(logMessage);
   }
@@ -76,7 +76,6 @@ class Paw {
     // Do nothing if current environment is not debug
     if (!shouldPrintLogs) return;
 
-    const fg = "\x1b[38;5;255m";
     const escape = "\x1B[0m";
 
     final timeStamp = InternalUtils.getCurrentTimeStamp();
@@ -85,10 +84,10 @@ class Paw {
       shouldIncludeSourceInfo,
     );
 
-    final prettyObj = InternalUtils.getPrettyObject(obj);
+    final prettyObj = InternalUtils.getPrettyObject(obj, darkTheme.tertiary);
 
     final String logMessage =
-        "\x1b[48;5;240m\x1b[1m$fg PAW › DEBUG $escape\x1b[48;5;237m$fg $timeStamp › $sourceFileInfo $escape$fg \n$prettyObj $escape";
+        "${darkTheme.bgDebug}\x1b[1m${darkTheme.primary} PAW › DEBUG $escape${darkTheme.secBg}${darkTheme.primary} $timeStamp › $sourceFileInfo $escape \n$prettyObj $escape";
 
     InternalUtils.log(logMessage);
   }
@@ -97,7 +96,6 @@ class Paw {
     // Do nothing if current environment is not debug
     if (!shouldPrintLogs) return;
 
-    const fg = "\x1b[38;5;255m";
     const escape = "\x1B[0m";
 
     final timeStamp = InternalUtils.getCurrentTimeStamp();
@@ -106,11 +104,12 @@ class Paw {
       shouldIncludeSourceInfo,
     );
 
-    final prettyError =
-        "\n\x1b[48;5;237m\x1b[3m$fg error $escape\n${InternalUtils.getPrettyError(error)}";
+    final String divider = '${darkTheme.errOne}----------$escape'; // (- * 10)
+
+    final prettyError = InternalUtils.getPrettyError(error, darkTheme.errTwo);
 
     final String logMessage =
-        "\x1b[48;5;203m\x1b[1m$fg PAW › ERROR $escape\x1b[48;5;237m$fg $timeStamp › $sourceFileInfo $escape\x1b[3m\x1b[38;5;203m $msg $escape$prettyError";
+        "${darkTheme.bgError}\x1b[1m${darkTheme.primary} PAW › ERROR $escape${darkTheme.secBg}${darkTheme.primary} $timeStamp › $sourceFileInfo $escape\x1b[3m${darkTheme.errOne} $msg$escape \n$divider\n$prettyError\n$divider";
 
     InternalUtils.log(logMessage);
   }
@@ -119,7 +118,6 @@ class Paw {
     // Do nothing if current environment is not debug
     if (!shouldPrintLogs) return;
 
-    const fg = "\x1b[38;5;255m";
     const escape = "\x1B[0m";
 
     final timeStamp = InternalUtils.getCurrentTimeStamp();
@@ -128,19 +126,18 @@ class Paw {
       shouldIncludeSourceInfo,
     );
 
-    final prettyError =
-        "\n\x1b[48;5;237m\x1b[3m$fg error $escape\n${InternalUtils.getPrettyError(error)}";
+    final String divider = '${darkTheme.errOne}----------$escape'; // (- * 10)
 
-    final getPrettyStacktrace = InternalUtils.getPrettyStackTrace(
+    final prettyError = InternalUtils.getPrettyError(error, darkTheme.errTwo);
+
+    final prettySt = InternalUtils.getPrettyStackTrace(
       stackTrace,
       maxLines: maxStackTraces,
+      color: darkTheme.tertiary,
     );
 
-    final prettySt =
-        "\n\x1b[48;5;237m\x1b[3m$fg stacktrace $escape\n$getPrettyStacktrace";
-
     final String logMessage =
-        "\x1b[48;5;1m\x1b[1m$fg PAW › FETAL $escape\x1b[48;5;237m$fg $timeStamp › $sourceFileInfo $escape\x1b[3m\x1b[38;5;203m $msg $escape$prettyError$prettySt";
+        "${darkTheme.bgFetal}\x1b[1m${darkTheme.primary} PAW › FETAL $escape${darkTheme.secBg}${darkTheme.primary} $timeStamp › $sourceFileInfo $escape\x1b[3m${darkTheme.errOne} $msg $escape\n$divider\n$prettyError\n$prettySt\n$divider";
 
     InternalUtils.log(logMessage);
   }

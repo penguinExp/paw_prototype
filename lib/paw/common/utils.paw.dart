@@ -78,6 +78,7 @@ class InternalUtils {
 
   static String getPrettyStackTrace(
     StackTrace? stackTrace, {
+    required String color,
     required int maxLines,
   }) {
     try {
@@ -94,7 +95,7 @@ class InternalUtils {
 
       final coloredSt = sanitizedList
           .map(
-            (line) => "${AnsiForegroundColors.white.code}$line",
+            (line) => "$color$line",
           )
           .toList()
           .join('\n');
@@ -106,9 +107,9 @@ class InternalUtils {
   }
 
   static String getPrettyError(
-    Object? error, {
-    String color = "\x1b[38;5;203m",
-  }) {
+    Object? error,
+    String color,
+  ) {
     if (error == null) return "";
 
     try {
@@ -133,9 +134,9 @@ class InternalUtils {
   }
 
   static String getPrettyObject(
-    Object? obj, {
-    String color = "\x1b[38;5;255m",
-  }) {
+    Object? obj,
+    String color,
+  ) {
     if (obj == null) return "";
 
     try {
@@ -157,7 +158,7 @@ class InternalUtils {
       return finalOutput;
     } catch (e) {
       // Return an error message if any exception occurs during conversion.
-      return 'Unable to convert the object. \n${getPrettyError(e)}';
+      return 'Unable to convert the object. \n${getPrettyError(e, color)}';
     }
   }
 
