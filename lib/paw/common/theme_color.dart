@@ -1,17 +1,63 @@
-class DarkTheme {
+abstract class PawTheme {
+  // text colors
+
+  String get primary;
+  String get sec;
+  String get tertiary;
+
+  // bg colors
+
+  String get bgWarn;
+  String get bgInfo;
+  String get bgTrace;
+  String get bgDebug;
+  String get bgError;
+  String get bgFetal;
+
+  String get secBg;
+
+  // accent colors
+
+  String get errOne;
+  String get errTwo;
+}
+
+class DarkTheme extends PawTheme {
+  @override
   final String primary = "\x1b[38;5;255m"; // white
-  final String sec = "\x1b[38;5;195m"; // white
-  final String secBg = "\x1b[48;5;238m"; // dark gray
-  final String errOne = "\x1b[38;5;208m"; // pink - red
-  final String errTwo = "\x1b[38;5;9m"; // pink - red
-  final String bgWarn = "\x1b[48;5;204m"; // pink
-  final String bgInfo = "\x1b[48;5;4m"; // blue
-  final String bgTrace = "\x1b[48;5;36m"; // green
+
+  @override
+  final String sec = "\x1b[38;5;195m"; // lighterWhite
+
+  @override
   final String tertiary = "\x1b[38;5;189m"; // purple white
+
+  @override
+  final String bgWarn = "\x1b[48;5;204m"; // pink
+
+  @override
+  final String bgInfo = "\x1b[48;5;4m"; // blue
+
+  @override
+  final String bgTrace = "\x1b[48;5;36m"; // green
+
+  @override
   final String bgDebug = "\x1b[48;5;240m"; // light gray
 
+  @override
   final String bgError = "\x1b[48;5;203m"; // red
+
+  @override
   final String bgFetal = "\x1b[48;5;1m"; // dark red
+
+  @override
+  final String secBg = "\x1b[48;5;238m"; // dark gray
+
+  @override
+  final String errOne = "\x1b[38;5;208m"; // red
+
+  @override
+  final String errTwo = "\x1b[38;5;9m"; // darkRed
 }
 
 ///
