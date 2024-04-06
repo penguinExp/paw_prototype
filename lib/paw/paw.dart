@@ -8,7 +8,8 @@ class Paw {
   final bool shouldPrintLogs;
   final bool shouldIncludeSourceInfo;
 
-  final darkTheme = DarkTheme();
+  final currentTheme = DarkTheme();
+  // final currentTheme = LightTheme();
 
   Paw({
     required this.name,
@@ -31,7 +32,7 @@ class Paw {
     );
 
     final String logMessage =
-        "${darkTheme.bgInfo}\x1b[1m${darkTheme.primary} PAW › INFO  $escape${darkTheme.secBg}${darkTheme.primary} $timeStamp › $sourceFileInfo $escape${darkTheme.sec} $msg $escape";
+        "${currentTheme.bgInfo}\x1b[1m${currentTheme.primary} PAW › INFO  $escape${currentTheme.secBg}${currentTheme.primary} $timeStamp › $sourceFileInfo $escape${currentTheme.sec} $msg $escape";
 
     InternalUtils.log(logMessage);
   }
@@ -49,7 +50,7 @@ class Paw {
     );
 
     final String logMessage =
-        "${darkTheme.bgWarn}\x1b[1m${darkTheme.primary} PAW › WARN  $escape${darkTheme.secBg}${darkTheme.primary} $timeStamp › $sourceFileInfo $escape\x1b[3m${darkTheme.errOne} $msg $escape";
+        "${currentTheme.bgWarn}\x1b[1m${currentTheme.primary} PAW › WARN  $escape${currentTheme.secBg}${currentTheme.primary} $timeStamp › $sourceFileInfo $escape\x1b[3m${currentTheme.errOne} $msg $escape";
 
     InternalUtils.log(logMessage);
   }
@@ -67,7 +68,7 @@ class Paw {
     );
 
     final String logMessage =
-        "${darkTheme.bgTrace}\x1b[1m${darkTheme.primary} PAW › TRACE $escape${darkTheme.secBg}${darkTheme.primary} $timeStamp › $sourceFileInfo $escape${darkTheme.sec} $msg $escape";
+        "${currentTheme.bgTrace}\x1b[1m${currentTheme.primary} PAW › TRACE $escape${currentTheme.secBg}${currentTheme.primary} $timeStamp › $sourceFileInfo $escape${currentTheme.sec} $msg $escape";
 
     InternalUtils.log(logMessage);
   }
@@ -84,10 +85,10 @@ class Paw {
       shouldIncludeSourceInfo,
     );
 
-    final prettyObj = InternalUtils.getPrettyObject(obj, darkTheme.tertiary);
+    final prettyObj = InternalUtils.getPrettyObject(obj, currentTheme.tertiary);
 
     final String logMessage =
-        "${darkTheme.bgDebug}\x1b[1m${darkTheme.primary} PAW › DEBUG $escape${darkTheme.secBg}${darkTheme.primary} $timeStamp › $sourceFileInfo $escape \n$prettyObj $escape";
+        "${currentTheme.bgDebug}\x1b[1m${currentTheme.primary} PAW › DEBUG $escape${currentTheme.secBg}${currentTheme.primary} $timeStamp › $sourceFileInfo $escape \n$prettyObj $escape";
 
     InternalUtils.log(logMessage);
   }
@@ -104,12 +105,14 @@ class Paw {
       shouldIncludeSourceInfo,
     );
 
-    final String divider = '${darkTheme.errOne}----------$escape'; // (- * 10)
+    final String divider =
+        '${currentTheme.errOne}----------$escape'; // (- * 10)
 
-    final prettyError = InternalUtils.getPrettyError(error, darkTheme.errTwo);
+    final prettyError =
+        InternalUtils.getPrettyError(error, currentTheme.errTwo);
 
     final String logMessage =
-        "${darkTheme.bgError}\x1b[1m${darkTheme.primary} PAW › ERROR $escape${darkTheme.secBg}${darkTheme.primary} $timeStamp › $sourceFileInfo $escape\x1b[3m${darkTheme.errOne} $msg$escape \n$divider\n$prettyError\n$divider";
+        "${currentTheme.bgError}\x1b[1m${currentTheme.primary} PAW › ERROR $escape${currentTheme.secBg}${currentTheme.primary} $timeStamp › $sourceFileInfo $escape\x1b[3m${currentTheme.errOne} $msg$escape \n$divider\n$prettyError\n$divider";
 
     InternalUtils.log(logMessage);
   }
@@ -126,18 +129,20 @@ class Paw {
       shouldIncludeSourceInfo,
     );
 
-    final String divider = '${darkTheme.errOne}----------$escape'; // (- * 10)
+    final String divider =
+        '${currentTheme.errOne}----------$escape'; // (- * 10)
 
-    final prettyError = InternalUtils.getPrettyError(error, darkTheme.errTwo);
+    final prettyError =
+        InternalUtils.getPrettyError(error, currentTheme.errTwo);
 
     final prettySt = InternalUtils.getPrettyStackTrace(
       stackTrace,
       maxLines: maxStackTraces,
-      color: darkTheme.tertiary,
+      color: currentTheme.tertiary,
     );
 
     final String logMessage =
-        "${darkTheme.bgFetal}\x1b[1m${darkTheme.primary} PAW › FETAL $escape${darkTheme.secBg}${darkTheme.primary} $timeStamp › $sourceFileInfo $escape\x1b[3m${darkTheme.errOne} $msg $escape\n$divider\n$prettyError\n$prettySt\n$divider";
+        "${currentTheme.bgFetal}\x1b[1m${currentTheme.primary} PAW › FETAL $escape${currentTheme.secBg}${currentTheme.primary} $timeStamp › $sourceFileInfo $escape\x1b[3m${currentTheme.errOne} $msg $escape\n$divider\n$prettyError\n$prettySt\n$divider";
 
     InternalUtils.log(logMessage);
   }

@@ -36,6 +36,44 @@ class DarkTheme extends PawTheme {
   final String bgWarn = "\x1b[48;5;204m"; // pink
 
   @override
+  final String bgInfo = "\x1b[48;2;0;255;0m"; // blue
+
+  @override
+  final String bgTrace = "\x1b[48;5;36m"; // green
+
+  @override
+  final String bgDebug = "\x1b[48;5;240m"; // light gray
+
+  @override
+  final String bgError = "\x1b[48;5;203m"; // red
+
+  @override
+  final String bgFetal = "\x1b[48;5;124m"; // dark red
+
+  @override
+  final String secBg = "\x1b[48;5;238m"; // dark gray
+
+  @override
+  final String errOne = "\x1b[38;5;208m"; // red
+
+  @override
+  final String errTwo = "\x1b[38;5;9m"; // darkRed
+}
+
+class LightTheme extends PawTheme {
+  @override
+  final String primary = "\x1b[38;5;255m"; // white
+
+  @override
+  final String sec = "\x1b[38;5;18m"; // lighterWhite
+
+  @override
+  final String tertiary = "\x1b[38;5;8m"; // purple white
+
+  @override
+  final String bgWarn = "\x1b[48;5;204m"; // pink
+
+  @override
   final String bgInfo = "\x1b[48;5;4m"; // blue
 
   @override
@@ -48,10 +86,10 @@ class DarkTheme extends PawTheme {
   final String bgError = "\x1b[48;5;203m"; // red
 
   @override
-  final String bgFetal = "\x1b[48;5;1m"; // dark red
+  final String bgFetal = "\x1b[48;5;124m"; // dark red
 
   @override
-  final String secBg = "\x1b[48;5;238m"; // dark gray
+  final String secBg = "\x1b[48;5;245m"; // dark gray
 
   @override
   final String errOne = "\x1b[38;5;208m"; // red
